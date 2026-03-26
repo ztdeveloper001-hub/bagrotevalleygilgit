@@ -1,0 +1,122 @@
+{
+  "entities": {
+    "BlogPost": {
+      "title": "Blog Post",
+      "description": "A blog post article with content and metadata.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "excerpt": { "type": "string" },
+        "content": { "type": "string" },
+        "author": { "type": "string" },
+        "date": { "type": "string" },
+        "category": { "type": "string" },
+        "image": { "type": "string" },
+        "readTime": { "type": "string" }
+      },
+      "required": ["title", "content", "author", "date", "category", "image"]
+    },
+    "Valley": {
+      "title": "Valley",
+      "description": "Information about a specific valley in Bagrote.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "heroImage": { "type": "string" },
+        "description": { "type": "string" },
+        "mapLocation": { "type": "string" },
+        "attractions": { "type": "array", "items": { "type": "string" } },
+        "trekkingRoutes": { "type": "array", "items": { "type": "string" } },
+        "difficulty": { "type": "string", "enum": ["Easy", "Moderate", "Challenging", "Expert"] },
+        "travelTime": { "type": "string" },
+        "bestSeason": { "type": "string" },
+        "gallery": { "type": "array", "items": { "type": "string" } },
+        "safetyTips": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["name", "heroImage", "description", "difficulty"]
+    },
+    "DirectoryListing": {
+      "title": "Directory Listing",
+      "description": "A business or service listing in the valley.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string", "enum": ["hotels", "guides", "jeeps", "camping"] },
+        "location": { "type": "string" },
+        "contact": { "type": "string" },
+        "rating": { "type": "number" },
+        "image": { "type": "string" },
+        "desc": { "type": "string" }
+      },
+      "required": ["name", "category", "location", "contact", "image"]
+    },
+    "GalleryImage": {
+      "title": "Gallery Image",
+      "description": "An image in the photo gallery.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "category": { "type": "string" },
+        "title": { "type": "string" },
+        "image": { "type": "string" }
+      },
+      "required": ["category", "title", "image"]
+    },
+    "Booking": {
+      "title": "Booking",
+      "description": "A reservation for a hotel, trek, or tour package.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "resourceId": { "type": "string" },
+        "resourceType": { "type": "string", "enum": ["hotel", "trek", "package"] },
+        "startDate": { "type": "string" },
+        "endDate": { "type": "string" },
+        "guests": { "type": "number" },
+        "totalPrice": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "cancelled", "completed"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "resourceId", "resourceType", "startDate", "endDate", "totalPrice", "status"]
+    },
+    "TourPackage": {
+      "title": "Tour Package",
+      "description": "A curated tour package for visitors.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "duration": { "type": "string" },
+        "price": { "type": "number" },
+        "image": { "type": "string" }
+      },
+      "required": ["title", "description", "duration", "price", "image"]
+    },
+    "LocalAd": {
+      "title": "Local Ad",
+      "description": "A paid advertisement for a local business.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "businessName": { "type": "string" },
+        "title": { "type": "string" },
+        "expiryDate": { "type": "string" }
+      },
+      "required": ["businessName", "title", "expiryDate"]
+    }
+  },
+  "firestore": {
+    "/blog": { "schema": "BlogPost", "description": "Collection of blog posts." },
+    "/valleys": { "schema": "Valley", "description": "Collection of valley details." },
+    "/directory": { "schema": "DirectoryListing", "description": "Collection of business listings." },
+    "/gallery": { "schema": "GalleryImage", "description": "Collection of gallery images." },
+    "/bookings": { "schema": "Booking", "description": "Collection of user bookings." },
+    "/packages": { "schema": "TourPackage", "description": "Collection of tour packages." },
+    "/ads": { "schema": "LocalAd", "description": "Collection of local advertisements." }
+  }
+}
